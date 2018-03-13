@@ -3,6 +3,7 @@ package com.example.ahmed.testnotification;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,19 +18,14 @@ Button addbtn,removeBtn;
         addbtn = (Button) findViewById(R.id.addbtn);
         removeBtn = (Button) findViewById(R.id.removebtn);
     }
-NotificationManager manager;
-    static  int id =1;
+
+    NewMessageNotification messageNotification;
     public void removebtn(View view) {
-        manager.cancelAll();
+        messageNotification.cancel(this);
     }
 
     public void addbtn(View view) {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this)
-                .setContentTitle("hi")
-                .setContentText("tha raining is coming soon")
-                .setSmallIcon(R.drawable.twitter);
-        manager =(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
-        manager.notify(id,builder.build());
-        id++;
+         messageNotification = new NewMessageNotification();
+        messageNotification.notify(this,"Good morning",1234);
     }
 }
